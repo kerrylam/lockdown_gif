@@ -1,12 +1,32 @@
 from flask import Flask, render_template, request, flash, redirect, session, jsonify
-from model import connect_to_db, db, User, Event, Event_Cocktail
-import api
 import requests
+import os
 
 app = Flask(__name__)
 app.secret_key = 'FLATTEN THE CURVE'
 
+API_KEY = os.environ['GIPHY_KEY']
+
 @app.route('/')
 def homepage():
     """Show homepage."""
-    return render_template('homepage.html')
+
+    url = 'https://api.giphy.com/v1/gifs/search'
+    payload = {'apikey': API_KEY,
+               'q': 'coronavirus',
+               'limit': 50,
+               'offset': 20,
+               'rating': 'R',
+               'lang': 'en'}
+
+    response = requests.get(url, params=payload)
+    data = response.json()
+    gifs = data['data']
+        
+
+    return render_template('homepage.html',
+                           gifs=gifs)
+
+if __name__ == '__main__':
+    app.debug = True
+    app.run(host='0.0.0.0')
