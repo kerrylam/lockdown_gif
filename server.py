@@ -22,10 +22,13 @@ def homepage():
     response = requests.get(url, params=payload)
     data = response.json()
     gifs = data['data']
+    main = gifs[0]
+    rest = gifs[1:]
         
 
     return render_template('homepage.html',
-                           gifs=gifs)
+                           main=main,
+                           gifs=rest)
 
 if __name__ == '__main__':
     app.debug = True
