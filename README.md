@@ -64,8 +64,8 @@ Get an API key from Giphy and save into a secrets.sh file as:
 ```
 export GIPHY_KEY="3u0gEa5TJ6xjOFPbFBOsAVz3jOtOBj2d"
 ```
-Make sure to include this file in your .gitignore
-<br>
+Make sure to include this file in your .gitignore file
+<br><br>
 
 Execute your shell script: 
 ```
